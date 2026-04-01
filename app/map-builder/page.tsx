@@ -10,6 +10,10 @@ export default function MapBuilderPage() {
 
   return (
     <div className="flex h-screen">
+      <div className="absolute top-2 left-2 z-50 rounded bg-black/80 px-2 py-1 text-xs text-white">
+        map-builder page rendered ✅
+      </div>
+
       <MapCanvas {...map} />
       <InspectorPanel {...map} />
     </div>
