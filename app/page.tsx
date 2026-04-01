@@ -1,8 +1,12 @@
+import Link from "next/link";
+
 export default function Page() {
   return (
-    <div className="min-h-screen bg-red-600 text-white text-4xl font-bold p-8">
-      ✅ Tailwind v4 is working
-    </div>
+    <main className="p-8 space-y-4">
+      <h1 className="text-2xl font-bold">DC Slotting</h1>
+      <Link className="text-blue-600 underline" href="/map-builder">
+        Go to Map Builder
+      </Link>
+    </main>
   );
 }
-``
