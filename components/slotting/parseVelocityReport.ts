@@ -134,11 +134,14 @@ export function parseVelocityReport(text: string): ParseResult {
       continue;
     }
 
-    // Units may be blank in your report; treat as 0 but warn
-    const units_30d = units ?? 0;
-    if (units == null) {
-      warnings.push(`Row ${r + 1} (${sku}): ORIG_ORDER_QTY blank → using 0`);
-    }
+    // If ORIG_ORDER_QTY is blank, skip SKU entirely for MVP
+   const units = num(parts[iUnits]);
+   if (units == null) {
+     warnings.push(`Row ${r + 1} (${sku}): ORIG_ORDER_QTY blank → skipping SKU (MVP rule)`);
+     continue;
+   }
+   const units_30d = units;
+
 
     // If your report truly has one row per SKU, duplicates should not happen.
     // But we protect against it anyway.
