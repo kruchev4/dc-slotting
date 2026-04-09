@@ -11,12 +11,21 @@ const LS_VELOCITY_KEY = "dc_slotting_velocity_v1";
 
 export default function MapBuilderPage() {
   const map = useMapState(DEFAULT_MODEL);
+  const [velocityRows, setVelocityRows] = useState<any[]>([]);
+
+useEffect(() => {
+  const saved = localStorage.getItem(LS_VELOCITY_KEY);
+  if (saved) setVelocityRows(JSON.parse(saved));
+}, []);
 
   return (
   <div className="flex h-screen">
     <div className="absolute top-2 left-2 z-50 rounded bg-black/80 px-2 py-1 text-xs text-white">
       map-builder page rendered ✅
     </div>
+    <div className="border-t p-4">
+  <VelocityImportPanel onImported={setVelocityRows} />
+</div>
 
     <div className="flex-1 min-w-0">
       <MapCanvas {...map} />
