@@ -129,10 +129,15 @@ export function parseVelocityReport(text: string): ParseResult {
     const W = num(parts[iW]);
     const H = num(parts[iH]);
 
-    if (L == null || W == null || H == null) {
-      warnings.push(`Row ${r + 1} (${sku}): missing unit dimensions (L/W/H)`);
-      continue;
-    }
+    
+if (units == null) {
+  warnings.push(
+    `Row ${r + 1} (${sku}): ORIG_ORDER_QTY blank → skipped (MVP rule)`
+  );
+  continue;
+}
+const units_30d = units;
+
 
     // If ORIG_ORDER_QTY is blank, skip SKU entirely for MVP
    const units = num(parts[iUnits]);
